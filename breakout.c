@@ -94,36 +94,7 @@ int main(void)
         }  
 
         // update the ball's position
-        move(ball, velocity_x, velocity_y);
         
-		// check for ball hitting the walls
-		// bounce off right edge of window
-		if (getX(ball) + getWidth(ball) >= getWidth(window))
-			{
-				reverseDirection(&velocity_x);
-			}
-
-		// bounce off left edge of window
-		else if (getX(ball) <= 0)
-			{
-				reverseDirection(&velocity_x);
-			}
-			
-		// bounce off top edge of window
-		else if (getY(ball) <= 0)
-			{
-				reverseDirection(&velocity_y);
-			}
-			
-		// hit bottom edge of window
-		else if (getY(ball) + getWidth(ball) >= getHeight(window))
-			{
-				lives--;
-				setLocation(ball, WIDTH/2 - RADIUS/2, 150);
-				setLocation(paddle, WIDTH/2 - 50/2, HEIGHT-30);
-				waitForClick();
-			}   
-
     }
 
     // wait for click before exiting
