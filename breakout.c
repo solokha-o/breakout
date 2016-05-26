@@ -128,8 +128,11 @@ void initBricks(GWindow window)
  */
 GOval initBall(GWindow window)
 {
-        // TODO
-    return NULL;
+    GOval ball = newGOval(200, 300, 3, 3);
+    setFilled(ball, true);
+    setColor(ball, "BLACK");
+    add(window, ball);
+    return ball;
 }
 
 /**
