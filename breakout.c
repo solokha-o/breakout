@@ -136,6 +136,27 @@ int main(void)
             setLocation(paddle, 160, 500);
             waitForClick();
         }
+
+
+        GObject object = detectCollision(window, ball);
+        
+        if (object != NULL)
+        {
+            // when ball strucks the paddle
+            if (object == paddle)
+            {
+                yspeed = -yspeed;
+            }
+            
+            // keep track of stats 
+            else if (strcmp(getType(object), "GRect") == 0)
+            {
+                removeGWindow(window, object);
+                yspeed = -yspeed;
+                points = points + 1;
+                bricks = bricks - 1;                
+            }
+        }
     }
 
     // wait for click before exiting
