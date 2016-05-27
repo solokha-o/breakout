@@ -78,8 +78,9 @@ int main(void)
     int points = 0;
 
     //ball speed
-    double xspeed =drand48() + 1.5;
-    double yspeed = 2.5;
+    int i = rand() %10/10 + rand() %10;
+    double xspeed = drand48() + i;
+    double yspeed = drand48() + i;
     
     // keep playing until game over
     while (lives > 0 && bricks > 0)
@@ -156,6 +157,7 @@ int main(void)
                 points = points + 1;
                 bricks = bricks - 1;                
             }
+            
         }
     }
 
@@ -193,7 +195,7 @@ void initBricks(GWindow window)
  */
 GOval initBall(GWindow window)
 {
-    GOval ball = newGOval(200, 300, 3, 3);
+    GOval ball = newGOval(200, 300, 10, 10);
     setFilled(ball, true);
     setColor(ball, "BLACK");
     add(window, ball);
@@ -217,8 +219,15 @@ GRect initPaddle(GWindow window)
  */
 GLabel initScoreboard(GWindow window)
 {
-    // TODO
-    return NULL;
+    GLabel label = newGLabel("0");
+    setFont(label, "Calibri-40");
+    double x = (getWidth(window) - getWidth(label)) / 2;
+    double y = (getHeight(window) - getHeight(label)) / 2;
+    setLocation(label, x, y);
+	setColor(label, "GRAY");
+    add(window, label);
+
+    return label;
 }
 
 /**
@@ -227,7 +236,7 @@ GLabel initScoreboard(GWindow window)
 void updateScoreboard(GWindow window, GLabel label, int points)
 {
     // update label
-    char s[12];
+    char s[4];
     sprintf(s, "%i", points);
     setLabel(label, s);
 
