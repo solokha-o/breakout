@@ -77,9 +77,22 @@ int main(void)
     // number of points initially
     int points = 0;
 
+    //ball speed
+    double xspeed =drand48() + 1.5;
+    double yspeed = 2.5;
+    
     // keep playing until game over
     while (lives > 0 && bricks > 0)
     {
+
+        //Scoreboard
+        updateScoreboard(window, label, points);
+        
+        // move ball
+        move(ball, xspeed, yspeed);
+
+        pause(10);
+    
         GEvent event = getNextEvent(MOUSE_EVENT);
         
         if (event != NULL)
@@ -95,6 +108,34 @@ int main(void)
 
         // update the ball's position
         
+        
+        // when ball hits left wall
+        if (getX(ball) <= 0)
+        {
+            xspeed = -xspeed;
+        }
+        
+        // when the ball hits the top wall.
+        if (getY(ball) <= 0)
+        {
+            yspeed = -yspeed;
+        }
+   
+        // when ball hits the right wall
+        if (getX(ball) + getWidth(ball) >= 400)
+        {
+            xspeed = -xspeed;
+        }
+        
+        // bottom wall below paddle
+        if (getY(ball) + getHeight(ball) >= 600)
+        {
+            lives = lives - 1;
+            // reset
+            setLocation(ball, WIDTH / 2 - RADIUS, HEIGHT / 2 + RADIUS);
+            setLocation(paddle, 160, 500);
+            waitForClick();
+        }
     }
 
     // wait for click before exiting
